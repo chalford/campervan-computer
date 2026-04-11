@@ -1,0 +1,13 @@
+[Unit]
+Description=Campervan Computer boot LED blink
+DefaultDependencies=yes
+After=local-fs.target
+ConditionPathExists=/usr/local/sbin/campervan-led-blink
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/campervan-led-blink
+TimeoutStartSec=30
+
+[Install]
+WantedBy=multi-user.target

@@ -9,7 +9,7 @@ This project is for building a lightweight, extensible computer for a campervan,
 - Display and control handled by a separate embedded device and an Android app
 - Iterative development: start with a bootable image, then add features incrementally
 
-## Workflow
+## Implementation Plan
 1. Build and test a minimal OS image for the Pi Zero 2 W
 2. Blink a LED on boot to confirm the image is working on the hardware
 3. Add and configure MQTT server
@@ -21,3 +21,6 @@ This project is for building a lightweight, extensible computer for a campervan,
 - All code and configuration should be documented and reproducible
 - Use lightweight, reliable components suitable for low-power ARM hardware
 - Security and reliability are priorities for unattended operation
+
+## Instructions
+- Update this file to keep track of any decisions, instructions, or status updates as you work on the project. Re-writing and refactoring are expected if things change significantly.

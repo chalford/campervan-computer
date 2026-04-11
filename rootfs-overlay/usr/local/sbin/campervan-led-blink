@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -eu
+
+# shellcheck disable=SC1091
+[ -f /etc/default/campervan-led-blink ] && . /etc/default/campervan-led-blink
+
+LED_NAME=${LED_NAME:-led0}
+BLINK_COUNT=${BLINK_COUNT:-8}
+ON_MS=${ON_MS:-120}
+OFF_MS=${OFF_MS:-120}
+
+LED_PATH="/sys/class/leds/${LED_NAME}"
+TRIGGER_PATH="${LED_PATH}/trigger"
+BRIGHTNESS_PATH="${LED_PATH}/brightness"
+
+if [ ! -d "${LED_PATH}" ] || [ ! -w "${TRIGGER_PATH}" ] || [ ! -w "${BRIGHTNESS_PATH}" ]; then
+  # Do not fail boot if this board/LED path is unavailable.
+  exit 0
+fi
+
+# Save the original trigger name to restore it later, if possible.
+ORIGINAL_TRIGGER=$(sed -n 's/.*\[\([^]]*\)\].*/\1/p' "${TRIGGER_PATH}" || true)
+
+echo none > "${TRIGGER_PATH}"
+
+i=0
+while [ "$i" -lt "$BLINK_COUNT" ]; do
+  echo 1 > "${BRIGHTNESS_PATH}"
+  usleep "$((ON_MS * 1000))"
+  echo 0 > "${BRIGHTNESS_PATH}"
+  usleep "$((OFF_MS * 1000))"
+  i=$((i + 1))
+done
+
+if [ -n "${ORIGINAL_TRIGGER}" ]; then
+  # Restore the original trigger by writing the trigger name back to the trigger file, if we were able to read it at the start.
+  echo "${ORIGINAL_TRIGGER}" > "${TRIGGER_PATH}" || true
+fi

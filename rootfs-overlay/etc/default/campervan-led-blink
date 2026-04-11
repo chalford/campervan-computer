@@ -1,0 +1,6 @@
+# Boot LED blink settings.
+# LED_NAME defaults to led0 on Raspberry Pi boards.
+LED_NAME=led0
+BLINK_COUNT=8
+ON_MS=120
+OFF_MS=120
