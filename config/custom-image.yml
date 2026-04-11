@@ -8,4 +8,5 @@ image:
   name: campervan-computer-os
 
 layer:
+  suite: bookworm-minbase
   svelte: embedded-svelte-static
