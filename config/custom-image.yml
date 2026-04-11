@@ -4,13 +4,11 @@ device:
   hostname: campervan-computer
 
 image:
-  layer: image-rpios-nosparse
+  layer: embedded-svelte-static
   rootfs_type: ext4
-  name: my-custom-os
+  name: campervan-computer-os
   compression: zstd
 
 layer:
   custom:
     - base-packages
-  ssh:
-    pubkey_user1: "ssh-rsa YOUR_PUBLIC_KEY_HERE"
