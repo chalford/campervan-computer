@@ -4,11 +4,8 @@ device:
   hostname: campervan-computer
 
 image:
-  layer: embedded-svelte-static
-  rootfs_type: ext4
+  layer: image-rpios
   name: campervan-computer-os
-  compression: zstd
 
 layer:
-  custom:
-    - base-packages
+  svelte: embedded-svelte-static
