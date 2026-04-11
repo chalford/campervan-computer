@@ -10,6 +10,7 @@ jobs:
 
       - name: Install Host Dependencies
         run: |
+          sudo apt-get update
           # rpi-image-gen needs these for filesystem manipulation
           sudo apt-get install -y git systemd-container python3-yaml bdebstrap
 
