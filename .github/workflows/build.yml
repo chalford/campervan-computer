@@ -1,0 +1,32 @@
+name: Build RPi Image
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Host Dependencies
+        run: |
+          sudo apt-get update
+          # rpi-image-gen needs these for filesystem manipulation
+          sudo apt-get install -y git systemd-container python3-yaml bdebstrap
+
+      - name: Clone rpi-image-gen
+        run: |
+          git clone https://github.com/raspberrypi/rpi-image-gen.git
+          cd rpi-image-gen
+          sudo ./install_deps.sh
+
+      - name: Build Image
+        run: |
+          # Note: We use sudo because the tool mounts pseudo-filesystems (proc, sysfs)
+          sudo ./rpi-image-gen/rpi-image-gen build -c config/custom-image.yaml
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rpi-custom-image
+          path: rpi-image-gen/work/*/deploy/*.img*

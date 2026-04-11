@@ -1,0 +1,16 @@
+# Example minimal config
+device:
+  layer: rpizero2w   # Hardware target (e.g., cm5, rpi4, rpi5)
+  hostname: campervan-computer
+
+image:
+  layer: image-rpios-nosparse
+  rootfs_type: ext4
+  name: my-custom-os
+  compression: zstd
+
+layer:
+  custom:
+    - base-packages
+  ssh:
+    pubkey_user1: "ssh-rsa YOUR_PUBLIC_KEY_HERE"
