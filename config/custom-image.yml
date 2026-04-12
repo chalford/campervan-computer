@@ -6,9 +6,11 @@ device:
 image:
   layer: image-rpios
   name: campervan-computer-os
-  compression: gzip
 
 layer:
   suite: bookworm-minbase
   svelte: embedded-svelte-static
   boot_led: campervan-led-blink
+
+deploy:
+  compression: none
