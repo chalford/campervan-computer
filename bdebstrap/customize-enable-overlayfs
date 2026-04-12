@@ -1,7 +1,11 @@
 #!/bin/sh
 
 # Enable the overlay filesystem
-raspi-config nonint enable_overlayfs
+# 1. Install overlayroot (postinst runs update-initramfs automatically)
+apt-get install -y overlayroot
+
+# 2. Activate it via cmdline.txt
+sed -i 's/^/overlayroot=tmpfs /' /boot/firmware/cmdline.txt
 
 # (Optional) Enable boot partition write-protection
-raspi-config nonint enable_bootro
+sed -i /etc/fstab -e "s#\(.*/boot/firmware.*\)defaults\(.*\)#\1defaults,ro\2#"
