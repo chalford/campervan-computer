@@ -10,4 +10,4 @@ image:
 layer:
   suite: bookworm-minbase
   svelte: embedded-svelte-static
-  boot-led: campervan-led-blink
+  boot_led: campervan-led-blink
