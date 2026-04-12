@@ -1,0 +1,25 @@
+# METABEGIN
+# X-Env-Layer-Name: campervan-led-blink
+# X-Env-Layer-Desc: Install a boot-time LED blink service for hardware validation.
+# X-Env-Layer-Version: 1.0.0
+# X-Env-Layer-Category: campervan
+# METAEND
+---
+mmdebstrap:
+  customize-hooks:
+    - |
+      payload="${DIRECTORY}/campervan-led-blink-files"
+
+      install -d -m 0755 "${1}/usr/local/sbin"
+      install -d -m 0755 "${1}/etc/default"
+      install -d -m 0755 "${1}/etc/systemd/system"
+      install -d -m 0755 "${1}/etc/systemd/system/multi-user.target.wants"
+
+      install -m 0755 "${payload}/usr/local/sbin/campervan-led-blink" \
+         "${1}/usr/local/sbin/campervan-led-blink"
+      install -m 0644 "${payload}/etc/default/campervan-led-blink" \
+         "${1}/etc/default/campervan-led-blink"
+      install -m 0644 "${payload}/etc/systemd/system/campervan-led-blink.service" \
+         "${1}/etc/systemd/system/campervan-led-blink.service"
+
+      ln -sfn ../campervan-led-blink.service "${1}/etc/systemd/system/multi-user.target.wants/campervan-led-blink.service"

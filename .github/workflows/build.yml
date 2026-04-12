@@ -21,7 +21,7 @@ jobs:
       - name: Build Image
         run: |
           # Note: We use sudo because the tool mounts pseudo-filesystems (proc, sysfs)
-          sudo ./rpi-image-gen/rpi-image-gen build -c config/custom-image.yml
+          sudo ./rpi-image-gen/rpi-image-gen build -S . -c config/custom-image.yml
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

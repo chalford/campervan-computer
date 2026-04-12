@@ -10,9 +10,4 @@ image:
 layer:
   suite: bookworm-minbase
   svelte: embedded-svelte-static
-
-# LED blink is provided via source overlay files in:
-# - rootfs-overlay/usr/local/sbin/campervan-led-blink
-# - rootfs-overlay/etc/default/campervan-led-blink
-# - rootfs-overlay/etc/systemd/system/campervan-led-blink.service
-# - rootfs-overlay/etc/systemd/system/multi-user.target.wants/campervan-led-blink.service
+  boot-led: campervan-led-blink
