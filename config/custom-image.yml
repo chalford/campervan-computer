@@ -11,3 +11,6 @@ layer:
   suite: bookworm-minbase
   svelte: embedded-svelte-static
   boot_led: campervan-led-blink
+
+deploy:
+  compress: gzip

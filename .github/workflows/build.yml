@@ -27,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: campervan-computer-os
-          path: work/deploy*/*.img*
+          path: work/deploy*/*.img.gz
